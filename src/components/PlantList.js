@@ -1,10 +1,31 @@
-import React from "react";
-import PlantCard from "./PlantCard";
+import React, { useState } from "react";
 
-function PlantList() {
+const PlantList = ({ plants }) => {
+  const [soldOut, setSoldOut] = useState({});
+
+  const toggleSoldOut = (id) => {
+    setSoldOut((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+  };
+
   return (
-    <ul className="cards">{/* render PlantCards components in here */}</ul>
+    <div>
+      {plants.map((plant) => (
+        <div key={plant.id} data-testid="plant-item">
+          <h4>{plant.name}</h4>
+          <img src={plant.image} alt={plant.name} />
+          <p>Price: {plant.price}</p>
+          <button
+            onClick={() => toggleSoldOut(plant.id)}
+          >
+            {soldOut[plant.id] ? "Out of Stock" : "In Stock"}
+          </button>
+        </div>
+      ))}
+    </div>
   );
-}
+};
 
 export default PlantList;

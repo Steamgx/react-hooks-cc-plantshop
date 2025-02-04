@@ -42,3 +42,4 @@ describe('1st Deliverable', () => {
     expect(plantPrices).toEqual(basePlantPrices);
   });
 })
+;
